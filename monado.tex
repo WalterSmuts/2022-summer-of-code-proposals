@@ -56,7 +56,9 @@ My understanding of this description is that the major work will lie in enabling
 the face tracking feature in the Monado XR runtime. This will allow XR
 applications to query the runtime for the user's head position and will enable use
 cases like the magic window. The hello\_xr sample application can be used to test
-this feature, although it might require some changes.
+this feature, although it might require some changes. If time permites I would
+like to write this Magic Window application using rust and the openxr rust
+bindings.
 
 My intuition does however tell me the user experience may not be great. Most
 consumer device cameras have a low framerate and high latency and may result in a
@@ -85,12 +87,27 @@ estimator. If time permits, I'd like to explore these optimizations as well.
 
 \section{Deliverables:}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa pqui
-officia deserunt mollit anim id est laborum.
+There are some deliverables that are clear and very likely to be delivered. These
+are listed below:
+
+\begin{itemize}
+\item Basic implementation of head/face tracking feature for the Monado XR runtime.
+\item Integration of this code into Monado, code-reviewed and merged.
+\item A working magic window POC using the hello\_xr application. If the
+application does not work out of the box, changes will be made to the application
+to get to a working POC.
+\end{itemize}
+
+\noindent
+Then there are some deliverables that are less clear or are dependent on time
+constraints:
+
+\begin{itemize}
+\item Improved head tracking using signal processing techniques
+\item Rust magic window demo application
+\item Support in Godot/Blender/Unreal Engine for mono-scopic displays
+\end{itemize}
+
 
 \section{Contributor Info:}
 
