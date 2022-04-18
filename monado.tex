@@ -2,6 +2,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=0.75in]{geometry}
 \usepackage{hyperref}
+\usepackage{float}
+
+\newcommand\ytl[2]{
+\parbox[b]{10em}{\hfill{\bfseries\sffamily
+#1}~$\cdots\cdots$~}\makebox[0pt][c]{$\bullet$}\vrule\quad \parbox[c]{8cm}{\vspace{3pt}\raggedright\sffamily #2.\\[3pt]}\\[-3pt]}
 
 \begin{document}
 \begin{center}
@@ -47,14 +52,36 @@ Godot, Blender and Unreal to support mono-scopic fish tank mode.
 
 \end{quote}
 
+My understanding of this description is that the major work will lie in enabling
+the face tracking feature in the Monado XR runtime. This will allow XR
+applications to query the runtime for the user's head position and will enable use
+cases like the magic window. The hello\_xr sample application can be used to test
+this feature, although it might require some changes.
+
+My intuition does however tell me the user experience may not be great. Most
+consumer device cameras have a low framerate and high latency and may result in a
+high end to end processing latency. I would expect the head position estimate to
+lag behind the ground truth, and therefore the image on the screen will lag. This
+could possibly be fixed by applying signal processing techniques such as a kalman
+filter or incorporating gyroscopic and accelerometer data in the head position
+estimator. If time permits, I'd like to explore these optimizations as well.
+
 \section{Timeline:}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-officia deserunt mollit anim id est laborum.
+\begin{table}[H]
+\centering
+\begin{minipage}[t]{.7\linewidth}
+\rule{\linewidth}{1pt}
+\ytl{Week 1 - 2}{Download, compile, explore Monado runtime code and example applications}
+\ytl{Week 3 - 4}{Get POC working, no matter how hacky}
+\ytl{Week 5 - 6}{Compile a set of reviewable/maintainable patches}
+\ytl{Week 7 - 8}{Make experience improvements - i.e. kalman filter, low pass filter or performance improvements}
+\ytl{Week 9 - 10}{Code review process and merge PRs}
+\ytl{Week 11 - 12}{Buffer Time - Things always take longer than expected}
+\bigskip
+\rule{\linewidth}{1pt}%
+\end{minipage}%
+\end{table}
 
 \section{Deliverables:}
 
