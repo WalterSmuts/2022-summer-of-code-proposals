@@ -1,0 +1,84 @@
+\input{common-prelude}
+
+\LARGE{\textbf{QEMU}} \\
+\vspace{1em}
+\Large{Extend aarch64 support in rust-vmm/vmm-reference} \\
+\vspace{1em}
+\normalsize\textbf{Walter Smuts} \\
+\normalsize{smuts.walter@gmail.com} \\
+\vspace{1em}
+\normalsize{Mentor: Andreea Florescu , Sergey Glushchenko} \\
+\vspace{1em}
+\normalsize{Google Summer of Code} \\
+
+\end{center}
+\begin{normalsize}
+
+\section{Project Description:}
+
+This project is one taken from the list of ideas presented by the organization
+itself. Therefore the following description is taken verbatim from the
+organization's website:
+
+\begin{quote}
+
+The vmm-reference is a reference implementation of a Rust VMM based on rust-vmm
+crates. This is currently used for testing the integration of rust-vmm components,
+with plans of extending it such that it becomes a starting point for custom Rust
+VMMs.
+
+The vmm-reference currently has support for x86\_64 and proof-of-concept level
+support for aarch64. On aarch64, it just supports booting a dummy VM with no
+devices, while on x86\_64 it has support for the virtio-net and virtio-blk devices.
+The purpose of this project is to extend the existing functionality getting it
+closer to what is already available on x86\_64, and consume the readily available
+crates (for example vm-allocator) that would make the integration easier.
+
+\end{quote}
+
+My understanding of the description above is that the majority of the work would
+involve writing rust code, reading ARM reference material, looking at the x86
+counterpart, writing python integration tests and doing manual tests and
+investigations. I think I'm in a good place take on this project since I've
+previously worked on a team in Amazon that works on the EC2 Nitro Hypervisor,
+writing Rust code.
+
+\section{Timeline:}
+
+The QEMU org did a really good job of breaking down the project already. Most of
+the following is just taken directly from the org website:
+
+\begin{table}[H]
+\centering
+\begin{minipage}[t]{.7\linewidth}
+\rule{\linewidth}{1pt}
+\ytl{Week 1 - 2}{Get a feel for the vmm-reference project and all the components}
+\ytl{Week 3 - 4}{Set up interrupt controller}
+\ytl{Week 5 - 6}{Add a real-time clock device}
+\ytl{Week 7 - 8}{Add a serial port}
+\ytl{Week 9 - 10}{Add flattened device tree (FDT) so guest has a machine description}
+\ytl{Week 11 - 12}{Buffer Time - Things always take longer than expected}
+\bigskip
+\rule{\linewidth}{1pt}%
+\end{minipage}%
+\end{table}
+
+\section{Deliverables:}
+
+The overall deliverable is to flesh out aarch64 (ARM) support in vmm-reference to
+make its features comparable to x86\_64. This can be broken up into these
+sub-steps:
+
+\begin{itemize}
+\setlength\itemsep{-0.1em}
+\item Add support for virtio block \& net for aarch64 aarch64
+\item Allocate MMIO ranges \& GSIs aarch64
+\item Create abstractions for initializing an FDT for booting aarch64
+\item Setup the interrupt controller aarch64
+\item vm-vcpu: Extend the KvmVm and KvmVcpu abstractions for aarch64 aarch64
+\item Import system allocator (once it becomes available) aarch64
+\item Integrate vm-vcpu changes for aarch64 support aarch64
+\item Create a minimal FDT aarch64
+\end{itemize}
+
+\input{common-tail}

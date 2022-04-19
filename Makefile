@@ -1,3 +1,6 @@
+qemu.pdf: qemu.tex common-*.tex
+	pdflatex qemu.tex
+
 haskell.pdf: haskell.tex common-*.tex
 	pdflatex haskell.tex
 
