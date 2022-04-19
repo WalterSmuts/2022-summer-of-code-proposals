@@ -1,7 +1,7 @@
-monado.pdf: monado.tex
+monado.pdf: monado.tex common-*.tex
 	pdflatex monado.tex
 
-template.pdf: template.tex
+template.pdf: template.tex common-*.tex
 	pdflatex template.tex
 
 clean:
