@@ -1,0 +1,85 @@
+\input{common-prelude}
+
+\LARGE{\textbf{Haskell.org}} \\
+\vspace{1em}
+\Large{HLS - hlint editor end-to-end integration} \\
+\vspace{1em}
+\normalsize\textbf{Walter Smuts} \\
+\normalsize{smuts.walter@gmail.com} \\
+\vspace{1em}
+\normalsize{Mentor: Michael Peyton Jones} \\
+\vspace{1em}
+\normalsize{Google Summer of Code} \\
+
+\end{center}
+\begin{normalsize}
+
+\section{Project Description:}
+
+Language servers are an attempt at solving the problem of each text editor having
+to implement all the IDE-features, like autocomplete, syntax highlighting etc, for
+each language it want's to support. If N editors implements these features for M
+languages we have N x M implementations. If we instead implement a language server
+for each language and they communicate over a common protocol with each editor
+then we've successfully reduced the number of projects to N + M. Great success!
+
+Haskell.org maintains an LSP server for haskell called Haskell Language Server
+(HLS). The most common features are implemented but some useful ones are still
+remaining. The one relevant to this project is called
+\href{https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textEdit}{AnnotatedTextEdit}.
+This feature allows an LSP client to make annotated edits and display the edit
+with the annotation in the editor and optionally prompt the user to accept or
+reject the edit.
+
+The use-case this enables is to be able to run the
+\href{https://github.com/ndmitchell/hlint}{hlint tool}, a linting tool similar to
+clippy for rust, from within a text editor. The editor can then prompt the user
+for each edit with an annotation explaining why this edit is done, giving the user
+the ability to accept or reject the edit.
+
+In order to get the entire workflow to work this will most likely require changes
+to HLS, hlint and a text editor. My editor of choice is vim/nvim, which I expect would
+mean changes to the LSP plugin to support this use-case fully. I'd be open to
+implement this for other common editors too if it's desired.
+
+If the project goes faster than anticipated I'd be happy to implement other LSP
+features for HLS.
+
+\section{Timeline:}
+
+This timeline takes into account that I'd be an absolute beginner to Haskell
+programming and moving much slower than someone already fluent in the language. My
+personal interests in pursuing this project is to finally be forced to get my
+hands dirty with Haskell and not just faf around with theory and philosophy.
+
+\begin{table}[H]
+\centering
+\begin{minipage}[t]{.7\linewidth}
+\rule{\linewidth}{1pt}
+\ytl{Week 1 - 2}{Get consensus on desired workflow and start familiarizing myself with all the different components}
+\ytl{Week 3 - 6}{Hack a POC together}
+\ytl{Week 7 - 8}{Compile a set of reviewable/maintainable patches for each project}
+\ytl{Week 9 - 10}{Code review process and merge PRs}
+\ytl{Week 11 - 12}{Buffer Time - Things always take longer than expected}
+\bigskip
+\rule{\linewidth}{1pt}%
+\end{minipage}%
+\end{table}
+
+\section{Deliverables:}
+
+The intended overall deliverable to the Haskell community is more engagement with
+the hlint tool and a better understanding of idiomatic Haskell. Breaking up the
+deliverables into concrete chunks results in this list:
+
+\begin{itemize}
+\setlength\itemsep{-0.1em}
+\item Implementation of the AnnotatedTextEdit feature in HLS
+\item Implementation of hlint communication with LSP
+\item Atleast one end-to-end working workflow of editor integrated hlint
+\item Lowering the barrier to using tools like hlint
+\item A Haskell community more in-tune with idiomatic Haskell
+\item Maybe some more LSP features
+\end{itemize}
+
+\input{common-tail}

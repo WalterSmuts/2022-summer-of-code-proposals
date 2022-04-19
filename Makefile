@@ -1,3 +1,6 @@
+haskell.pdf: haskell.tex common-*.tex
+	pdflatex haskell.tex
+
 monado.pdf: monado.tex common-*.tex
 	pdflatex monado.tex
 
