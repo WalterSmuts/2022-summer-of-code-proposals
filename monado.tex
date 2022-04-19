@@ -2,7 +2,7 @@
 
 \LARGE{\textbf{Monado}} \\
 \vspace{1em}
-\Large{XR - Magic Window} \\
+\Large{XR - Fish Tank} \\
 \vspace{1em}
 \normalsize\textbf{Walter Smuts} \\
 \normalsize{smuts.walter@gmail.com} \\
@@ -42,12 +42,31 @@ Godot, Blender and Unreal to support mono-scopic fish tank mode.
 \end{quote}
 
 My understanding of this description is that the major work will lie in enabling
-the face tracking feature in the Monado XR runtime. This will allow XR
-applications to query the runtime for the user's head position and will enable use
-cases like the magic window. The hello\_xr sample application can be used to test
-this feature, although it might require some changes. If time permites I would
-like to write this Magic Window application using rust and the openxr rust
-bindings.
+the face tracking feature in the Monado XR runtime. There are two ways to expose
+this face tracking information to the XR application. One way is to use an
+existing XR form factor (HMD or magic window) and send dynamic FOV values to
+achieve the fish tank effect. This has the advantage of not having to change the
+OpenXR spec at all and could even enable existing applications to work out of the
+box. This, however, slightly abuses the form factor and may lead to unnecessary
+complexity/confusion/bugs in the future.
+
+Another option is to expose a whole new form factor, the fishtank configuration,
+to the application and send the head position information explicitly. This allows
+for much more flexibility and could be regarded as the "proper" way of doing
+things.  Unfortunately it does require changes to the OpenXR spec and won't work
+with applications that does not support the fishtank configuration explicitly.
+
+Since there are two avenues for investigation here I need to choose one. The
+advantages of having support for existing applications and not needing to go
+through the process of having to upstream OpenXR spec changes seems attractive.
+For this reason I propose this project follows the path of least resistance and
+the rest of this document assumes we're NOT adding new XR form factors and ARE
+implementing the dynamic FOV option, although please have a look at the "Inclusive
+Suggestion" section.
+
+The hello\_xr sample application can be used to test this the fish tank feature,
+although it might require some changes. If time permits I would like to write a
+pure POC Magic Window application using Rust and the openxr rust bindings.
 
 My intuition tells me the user experience may not be great. Most consumer device
 cameras have a low framerate and high latency and may result in a high end to end
@@ -82,7 +101,7 @@ are listed below:
 \begin{itemize}
 \item Basic implementation of head/face tracking feature for the Monado XR runtime.
 \item Integration of this code into Monado, code-reviewed and merged.
-\item A working magic window POC using the hello\_xr application. If the
+\item A working fish tank POC using the hello\_xr application. If the
 application does not work out of the box, changes will be made to the application
 to get to a working POC.
 \end{itemize}
@@ -93,7 +112,7 @@ constraints:
 
 \begin{itemize}
 \item Improved head tracking using signal processing techniques
-\item Rust magic window demo application
+\item Rust fish tank demo application
 \item Support in Godot/Blender/Unreal Engine for mono-scopic displays
 \end{itemize}
 
